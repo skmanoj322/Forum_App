@@ -47,12 +47,7 @@ export default function Forum() {
 	const session = useSession();
 	const router = useRouter();
 
-	const [allForums, setAllForm] = useState([]);
-	const [forums, setForums] = useState<ForumArray | null[]>([]);
-	const [page, setPage] = useState(1);
-	const [selectedForum, setSelectedForum] = useState(null);
-	const [newComment, setNewComment] = useState("");
-	const containerRef = useRef<HTMLDivElement | null>(null);
+	const [forums, setForums] = useState<ForumArray[]>();
 	const [showModal, setShowModal] = useState(false);
 	const [formData, setFormData] = useState<FormData>({
 		title: "",
@@ -77,44 +72,6 @@ export default function Forum() {
 	useEffect(() => {
 		getAllforms();
 	}, []);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			if (!containerRef.current) return;
-			const { scrollTop, scrollHeight, clientHeight } =
-				containerRef.current;
-			if (scrollTop + clientHeight >= scrollHeight - 50) {
-				const next = allForums.slice(page * 10, (page + 1) * 10);
-				setForums((prev) => [...prev, ...next]);
-				setPage((prev) => prev + 1);
-			}
-		};
-		const ref = containerRef.current;
-		ref?.addEventListener("scroll", handleScroll);
-		return () => ref?.removeEventListener("scroll", handleScroll);
-	}, [page]);
-	const handleCommentSubmit = () => {
-		if (!newComment.trim()) return;
-		const updated = forums.map((forum) => {
-			if (forum.id === selectedForum.id) {
-				return {
-					...forum,
-					comments: [
-						...forum.comments,
-						{
-							id: Date.now().toString(),
-							content: newComment,
-							author: session?.user?.name || "You",
-							createdAt: new Date().toLocaleString(),
-						},
-					],
-				};
-			}
-			return forum;
-		});
-		setForums(updated);
-		setNewComment("");
-	};
 
 	const handleDeleteForum = async (id: string) => {
 		const deleteById = await fetch("/api/v1/forums", {
@@ -184,10 +141,7 @@ export default function Forum() {
 	};
 
 	return (
-		<div
-			className="p-4 max-w-2xl mx-auto h-screen overflow-y-auto space-y-4"
-			ref={containerRef}
-		>
+		<div className="p-4 max-w-2xl mx-auto h-screen overflow-y-auto space-y-4">
 			{showModal && (
 				<div className="fixed inset-0 backdrop-blur bg-opacity-50 flex items-center justify-center z-50">
 					<div className="bg-white p-6 rounded shadow w-full max-w-md">
@@ -274,7 +228,7 @@ export default function Forum() {
 			</div>
 
 			<div className="space-y-4">
-				{forums?.map((forum: any) => (
+				{forums?.map((forum) => (
 					<div
 						key={forum.id}
 						className="relative bg-white border hover:shadow-md p-4 rounded-lg transition"
@@ -296,7 +250,7 @@ export default function Forum() {
 								className="flex items-center gap-1"
 								title={`Upvoted by:`}
 							>
-								<ThumbsUp className="w-4 h-4" /> {forum.upvotes}
+								{/* <ThumbsUp className="w-4 h-4" /> {forum.upvotes} */}
 							</span>
 							<span className="flex items-center gap-1">
 								<MessageCircle className="w-4 h-4" />{" "}
