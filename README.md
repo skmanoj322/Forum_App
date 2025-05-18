@@ -1,4 +1,4 @@
-# 🗣️ Community Forums – Fullstack App (WIP)
+# Community Forums – Fullstack App
 
 Built with **Next.js**, **React**, **Prisma**, and **PostgreSQL**, currently using mocked frontend data and local session for prototyping.
 
