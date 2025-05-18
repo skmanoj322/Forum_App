@@ -1,42 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { Sparkles, ThumbsUp, MessageCircle } from "lucide-react";
-import { getServerSession } from "next-auth";
-import { signIn, signOut, useSession } from "next-auth/react";
-
-const mockSession = {
-	user: {
-		name: "Mock User",
-		email: "mock@example.com",
-	},
-};
-
-const generateMockForums = (count = 50) =>
-	Array.from({ length: count }).map((_, i) => ({
-		id: (i + 1).toString(),
-		title: `Forum Topic ${i + 1}`,
-		description: `This is a discussion on topic number ${i + 1}.`,
-		tags: ["general", i % 2 === 0 ? "discussion" : "help"],
-		createdAt: new Date(Date.now() - i * 10000000).toLocaleString(),
-		upvotes: Math.floor(Math.random() * 100),
-		comments: Array.from({ length: Math.floor(Math.random() * 5) }).map(
-			(_, j) => ({
-				id: `c${i}-${j}`,
-				content: `Comment ${j + 1} on forum ${i + 1}`,
-				author: `User ${j + 1}`,
-				createdAt: new Date(Date.now() - j * 500000).toLocaleString(),
-			})
-		),
-	}));
+import { Sparkles } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 export default function HomePage() {
-	const session = useSession();
-	const [allForums] = useState(generateMockForums());
-	const [forums, setForums] = useState(allForums.slice(0, 10));
-	const [page, setPage] = useState(1);
-	const [selectedForum, setSelectedForum] = useState(null);
-	const [newComment, setNewComment] = useState("");
-	const containerRef = useRef(null);
-
 	const handleSignIn = () => {
 		signIn("google", {
 			callbackUrl: "/forum",
@@ -54,7 +19,7 @@ export default function HomePage() {
 				onClick={handleSignIn}
 				className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-2 rounded-lg shadow hover:scale-105 transition"
 			>
-				Sign in with Google (Mock)
+				Sign in with Google
 			</button>
 		</div>
 	);
