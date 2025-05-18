@@ -1,11 +1,11 @@
-import { createForm } from "@/pages/lib/forum/createForum";
-import { getAllForum } from "@/pages/lib/forum/getAllForum";
+import { createForm } from "@/lib/forum/createForum";
+import { getAllForum } from "@/lib/forum/getAllForum";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 import { getToken } from "next-auth/jwt";
-import { updateFormHandler } from "@/pages/lib/forum/updateForum";
-import { deleteForm } from "@/pages/lib/forum/deleteForum";
+import { updateFormHandler } from "@/lib/forum/updateForum";
+import { deleteForm } from "@/lib/forum/deleteForum";
 
 type Method = "GET" | "POST" | "DELETE" | "PUT";
 export default async function handler(
