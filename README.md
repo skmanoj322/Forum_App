@@ -34,7 +34,6 @@ Built with **Next.js**, **React**, **Prisma**, and **PostgreSQL**, currently usi
 
 ```bash
 git clone https://github.com/your-username/community-forums.git
-cd community-forums
 ```
 
 ---
