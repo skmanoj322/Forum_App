@@ -43,7 +43,7 @@ git clone https://github.com/your-username/community-forums.git
 Create a `.env` file in the root:
 
 ```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/community_forums"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5450/community_forums"
 NEXTAUTH_SECRET=super-secret
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
