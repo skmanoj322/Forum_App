@@ -28,7 +28,7 @@ Built with **Next.js**, **React**, **Prisma**, and **PostgreSQL**, currently usi
 | Backend  | Next.js API Routes              |
 | ORM      | Prisma                          |
 | Database | PostgreSQL (via Docker Compose) |
-| Auth     | Mock session (to be replaced)   |
+| Auth     | NextAuth                        |
 | Language | TypeScript                      |
 
 ---
